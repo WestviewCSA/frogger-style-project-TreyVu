@@ -6,27 +6,33 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 public class Sprite{
-	private Image forward, backward, left, right; 	
+	private Image forward; 	
+	
 	private AffineTransform tx;
 	
+	// attributes of a Monkey object
 	int dir = 0; 					//0-forward, 1-backward, 2-left, 3-right
-	int width, height;
+	int width, height;				// used for hit boxes and collisions
 	int x, y;						//position of the object
 	int vx, vy;						//movement variables
-	double scaleWidth = 1.0;		//change to scale image
-	double scaleHeight = 1.0; 		//change to scale image
+	
+	double scaleFactor = 0.5;
+	double scaleWidth = scaleFactor;		//change to scale image
+	double scaleHeight = scaleFactor; 		//change to scale image
 
+	// default constructor
 	public Sprite() {
-		forward 	= getImage("/imgs/"+"forwardFile.png"); //load the image for Tree
-		backward 	= getImage("/imgs/"+"backward.png"); //load the image for Tree
-		left 		= getImage("/imgs/"+"left.png"); //load the image for Tree
-		right 		= getImage("/imgs/"+"right.png"); //load the image for Tree
+		
+		forward 	= getImage("/imgs/"+"_______"); //load the image for Tree
 
 		//alter these
-		width = 0;
-		height = 0;
-		x = 0;
-		y = 0;
+		width = (int) (100*scaleFactor);		// for the hit box
+		height = (int) (100*scaleFactor);		// for the hit box
+		
+		// top-left location of your image
+		x = Frame.width/2 - width*2;	
+		y = Frame.height/2 - height*2;
+		
 		vx = 0;
 		vy = 0;
 		
@@ -36,6 +42,49 @@ public class Sprite{
 									//use your variables
 		
 	}
+	
+	public Sprite(int x, int y) {
+		// sometimes you still need the work done by another constructor, you can call it
+		this(); // invoke the default constructor
+		
+		// set this object's attributes
+		// this.x --> specifies the x attribute, NOT the parameter x
+		this.x = x;
+		this.y = y;
+		
+	}
+	
+	// methods for setting position
+		public void setX(int x) {
+			this.x = x;
+		}
+		public void setY(int y) {
+			this.y = y;
+		}
+		
+		// methods for changing position
+		public void addX(int x) {
+			this.x += x;
+		}
+		public void addY(int y) {
+			this.y += y;
+		}
+		
+		// methods for getting position
+		public int getX() {
+			return this.x;
+		}
+		public int getY() {
+			return this.y;
+		}
+		
+		// methods for getting height/width
+		public int getHeight() {
+			return height;
+		}
+		public int getWidth() {
+			return width;
+		}
 
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
@@ -46,22 +95,8 @@ public class Sprite{
 		
 		init(x,y);
 		
-		switch(dir) {
-		case 0:
-			g2.drawImage(forward, tx, null);
-			break;
-		case 1:
-			g2.drawImage(backward, tx, null);
-
-			break;
-		case 2:
-			g2.drawImage(left, tx, null);
-
-			break;
-		case 3:
-			g2.drawImage(right, tx, null);
-			break;
-		}
+		g2.drawImage(forward, tx,  null);
+		
 
 	}
 	
