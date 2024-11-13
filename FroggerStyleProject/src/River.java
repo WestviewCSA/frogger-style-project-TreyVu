@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
@@ -52,6 +53,59 @@ public class River{
 		this.x = x;
 		this.y = y;
 		
+	}
+	
+	// methods for setting position
+			public void setX(int x) {
+				this.x = x;
+			}
+			public void setY(int y) {
+				this.y = y;
+			}
+			
+			// methods for changing position
+			public void addX(int x) {
+				this.x += x;
+			}
+			public void addY(int y) {
+				this.y += y;
+			}
+			
+			// methods for getting position
+			public int getX() {
+				return this.x;
+			}
+			public int getY() {
+				return this.y;
+			}
+			
+			// methods for getting height/width
+			public int getHeight() {
+				return height;
+			}
+			public int getWidth() {
+				return width;
+			}
+	
+	public boolean collided(Monkey mainChar) {
+		// represent each object as a rectangle
+		Rectangle rectMain = new Rectangle(
+			mainChar.getX(),
+			mainChar.getY(),
+			mainChar.getWidth(),
+			mainChar.getHeight()
+		);
+		
+		// represent the obj we're querying for info as a rectangle
+		Rectangle rectObj = new Rectangle (
+				this.x,
+				this.y,
+				this.width,
+				this.height
+		);
+		
+		return rectMain.intersects(rectObj);
+	
 	}
 
 	public void paint(Graphics g) {

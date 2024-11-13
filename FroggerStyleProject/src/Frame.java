@@ -45,12 +45,25 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	// a row of MonkeyScrolling objects
 	Duck[] duckRow1 = new Duck[10]; // only creates bookshelf, not books
 	Duck[] duckRow2 = new Duck[10];
+	
 	Slime1[] slimeRow1 = new Slime1[6];
+	Slime2[] slimeRow2 = new Slime2[6];
+	Slime1[] slimeRow3 = new Slime1[6];
+	
 	Stone[] stoneRow1 = new Stone[10];
 	Stone[] stoneRow2 = new Stone[10];
+	Stone[] stoneRow3 = new Stone[10];
+	
 	River[] riverRow1 = new River[10];
 	River[] riverRow2 = new River[10];
+	
 	Grass[] grassRow1 = new Grass[10];
+	
+	Wood[] woodRow1 = new Wood[10];
+	
+	Lava[] lavaRow1 = new Lava[10];
+	
+	Flamingo[] flamingoRow1 = new Flamingo[4];
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -61,7 +74,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			g.drawLine(0, i, Frame.width, i); // horizontal
 			g.drawLine(i, 0, i, Frame.height); // horizontal
 		}
-		
+		for (Lava obj : lavaRow1) {
+			obj.paint(g);
+		}
+		for (Wood obj : woodRow1) {
+			obj.paint(g);
+		}
 		for (Grass obj : grassRow1) {
 			obj.paint(g);
 		}
@@ -77,11 +95,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		for (Stone obj : stoneRow2) {
 			obj.paint(g);
 		}
-		
-		
-		// paint the objects that you have
-		monkey.paint(g);
-		
+		for (Stone obj : stoneRow3) {
+			obj.paint(g);
+		}
+
 		// paint the objects that you have
 		// for each object in the array
 		for (Duck obj : duckRow1) { // for every Duck object in row1 array
@@ -93,23 +110,79 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		for (Slime1 obj : slimeRow1) {
 			obj.paint(g);
 		}
+		for (Slime2 obj : slimeRow2) {
+			obj.paint(g);
+		}
+		for (Slime1 obj : slimeRow3) {
+			obj.paint(g);
+		}
 		
+		for (Flamingo obj : flamingoRow1) {
+			obj.paint(g);
+		}
+		
+		// last paint monkey
+		monkey.paint(g);
 		
 		// collision detection for each duck object in rrow1
 		for(Duck obj : duckRow1) {
 			// for every object, invoke the collided method
 			if (obj.collided(monkey)) {
-				System.out.println("OUCH");
+				//System.out.println("OUCH");
+				monkey.setX(obj.getX());
+				monkey.setY(obj.getY());
+				System.out.println("Mount Duck");
 			}
 		}
 		for(Duck obj : duckRow2) {
-			// for every object, invoke the collided method
 			if (obj.collided(monkey)) {
-				System.out.println("OUCH2");
+				monkey.setX(obj.getX());
+				monkey.setY(obj.getY());
+				System.out.println("Mount Duck");
 			}
 		}
-
+		for(River obj : riverRow1) {
+			// for every object, invoke the collided method
+			if (obj.collided(monkey)) {
+				System.out.println("wet");
+			}
+		}
+		for(River obj : riverRow2) {
+			// for every object, invoke the collided method
+			if (obj.collided(monkey)) {
+				System.out.println("wet2");
+			}
+		}
+		
+		for(Slime1 obj : slimeRow1) {
+			if (obj.collided(monkey)) {
+				monkey.setX(space*5);
+				monkey.setY(space*8);
+			}
+		}
+		for(Slime2 obj : slimeRow2) {
+			if (obj.collided(monkey)) {
+				monkey.setX(space*5);
+				monkey.setY(space*8);
+			}
+		}
+		for(Slime1 obj : slimeRow3) {
+			if (obj.collided(monkey)) {
+				monkey.setX(space*5);
+				monkey.setY(space*8);
+			}
+		}
+		
+		for(Flamingo obj : flamingoRow1) {
+			// for every object, invoke the collided method
+			if (obj.collided(monkey)) {
+				//System.out.println("OUCH");
+				monkey.setX(obj.getX());
+				monkey.setY(obj.getY());
+			}
+		}
 	}
+
 	
 	public static void main(String[] arg) {
 		Frame f = new Frame();
@@ -129,10 +202,18 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//backgroundMusic.play();
 
 		int space = Frame.width/10; 
-		
-		for (int i=0; i < grassRow1.length; i++) {
-			grassRow1[i] = new Grass(i*space, space*5);
+		// set up  any 1D array here - create the objects hat go in them;
+			// create the object and put it in the array at position i
+		for (int i=0; i < lavaRow1.length; i++) {
+			lavaRow1[i] = new Lava(i*space, space*0);
 		}
+		for (int i=0; i < woodRow1.length; i++) {
+			woodRow1[i] = new Wood(i*space, space*1);
+		}
+		for (int i=0; i < grassRow1.length; i++) {
+			grassRow1[i] = new Grass(i*space, space*2);
+		}
+		
 		for (int i=0; i < riverRow1.length; i++) {
 			riverRow1[i] = new River(i*space, space*6);
 		}
@@ -145,24 +226,26 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		for (int i=0; i < stoneRow2.length; i++) {
 			stoneRow2[i] = new Stone(i*space, space*8);
 		}
-		
-		
-		// set up  any 1D array here - create the objects hat go in them;
+		for (int i=0; i < stoneRow3.length; i++) {
+			stoneRow3[i] = new Stone(i*space, space*5);
+		}
 		for (int i=0; i < duckRow1.length; i++) {
-			
-			// create the object and put it in the array at position i
-			duckRow1[i] = new Duck(i*(Frame.width/(duckRow1.length-4)), space*7+12);
-			
+			duckRow1[i] = new Duck(i*(Frame.width/(duckRow1.length-4))+30, space*7+12);
 		}
 		for (int i=0; i < duckRow2.length; i++) {
-			
-			// create the object and put it in the array at position i
-			duckRow2[i] = new Duck(i*(Frame.width/(duckRow2.length-4)), space*6+12);
-			
+			duckRow2[i] = new Duck(i*(Frame.width/(duckRow2.length-4)), space*6+12);	
 		}
-		
 		for (int i=0; i < slimeRow1.length; i++) {
 			slimeRow1[i] = new Slime1(i*(Frame.width/(slimeRow1.length-2)), space*4+20);			
+		}
+		for (int i=0; i < slimeRow2.length; i++) {
+			slimeRow2[i] = new Slime2(i*(Frame.width/(slimeRow2.length-0)), space*3+20);			
+		}
+		for (int i=0; i < slimeRow3.length; i++) {
+			slimeRow3[i] = new Slime1(i*(Frame.width/(slimeRow3.length-2))+30, space*2+20);			
+		}
+		for (int i=0; i < flamingoRow1.length; i++) {
+			flamingoRow1[i] = new Flamingo(i*(Frame.width/(flamingoRow1.length-0))+30, space*0+20);			
 		}
 		
 		
@@ -222,7 +305,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println(arg0.getKeyCode());
+		//System.out.println(arg0.getKeyCode());
 		
 //		if (arg0.getKeyCode() == 87 || arg0.getKeyCode() == 38) { // UP
 //			monkey.move(0);
@@ -234,27 +317,29 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 //			monkey.move(3);
 //		}
 		
+		
 		int space = Frame.width/10; 
 
 		int key = arg0.getKeyCode();
 	       // release the up, down, left right, set the dx  to 0. Link will stop moving.
-	        if (key == KeyEvent.VK_LEFT) 
-	        {
+	        if (key == KeyEvent.VK_LEFT) {
 	            monkey.addX(-space);
-	        }
-	 
-	        if (key == KeyEvent.VK_RIGHT) 
-	        {
-	        	monkey.addX(space);;	        }
-	 
-	        if (key == KeyEvent.VK_UP) 
-	        {
+	            System.out.println("x: " + monkey.getX());
+	            monkey.fixX();
+	        } if (key == KeyEvent.VK_RIGHT) {
+	        	monkey.addX(space);	     
+	        	System.out.println("x: " + monkey.getX());
+	        	monkey.fixX();
+	        } if (key == KeyEvent.VK_UP) {
 	            monkey.addY(-space);
-	        }
-	 
-	        if (key == KeyEvent.VK_DOWN) 
-	        {
-	        	monkey.addY(space);
+	            System.out.println("y: " + monkey.getY());
+	            monkey.fixX();
+	        } if (key == KeyEvent.VK_DOWN) {
+	        	if (monkey.getY() != space*9+15) {
+	        		monkey.addY(space);
+	        	}
+	        	System.out.println("y: " + monkey.getY());
+	        	monkey.fixX();
 	        }
 		
 	}
