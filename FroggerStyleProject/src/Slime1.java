@@ -82,36 +82,50 @@ public class Slime1{
 	
 	
 	// methods for setting position
-			public void setX(int x) {
-				this.x = x;
-			}
-			public void setY(int y) {
-				this.y = y;
-			}
-			
-			// methods for changing position
-			public void addX(int x) {
-				this.x += x;
-			}
-			public void addY(int y) {
-				this.y += y;
-			}
-			
-			// methods for getting position
-			public int getX() {
-				return this.x;
-			}
-			public int getY() {
-				return this.y;
-			}
-			
-			// methods for getting height/width
-			public int getHeight() {
-				return height;
-			}
-			public int getWidth() {
-				return width;
-			}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	// methods for changing position
+	public void addX(int x) {
+		this.x += x;
+	}
+	public void addY(int y) {
+		this.y += y;
+	}
+	
+	// methods for getting position
+	public int getX() {
+		return this.x;
+	}
+	public int getY() {
+		return this.y;
+	}
+	
+	// methods for getting height/width
+	public int getHeight() {
+		return height;
+	}
+	public int getWidth() {
+		return width;
+	}
+	// mehthods for setting vx/vy
+	public void setVx(int vx) {
+		this.vx = vx; 
+	}
+	public void setVy(int vy) {
+		this.vy = vy;
+	}
+	// methods for getting vx/vy
+	public int getVx() {
+		return vx;
+	}
+	public int getVy() {
+		return vy;
+	}
 	
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
@@ -126,6 +140,9 @@ public class Slime1{
 			x = -width;
 		}
 		
+		g.setColor(Color.red);
+		g.drawRect(x, y, width, height);
+		
 		init(x,y);
 		
 		g2.drawImage(forward, tx,  null);
@@ -134,7 +151,11 @@ public class Slime1{
 		if (x < 0) { 
 			x = Frame.width;
 		}
-
+	}
+	
+	public void showHitBoxes(Graphics g) {
+		g.setColor(Color.red);
+		g.drawRect(getX(), getY(), getWidth(), getHeight());
 	}
 	
 	private void init(double a, double b) {

@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -29,8 +30,8 @@ public class Stone{
 		forward 	= getImage("/imgs/"+"bg-stone1.png"); //load the image for Tree
 
 		//alter these
-		width = (int) (100*scaleFactor);		// for the hit box
-		height = (int) (100*scaleFactor);		// for the hit box
+		width = 100;		// for the hit box
+		height = 80;		// for the hit box
 		
 		// top-left location of your image
 		x = Frame.width/2 - width*2;	
@@ -66,10 +67,49 @@ public class Stone{
 		
 		init(x,y);
 		
+		
+		
 		g2.drawImage(forward, tx,  null);
 		
-
+		g.setColor(Color.red);
+		g.drawRect(x, y, width, height);
 	}
+	
+	// methods for setting position
+		public void setX(int x) {
+			this.x = x;
+		}
+		public void setY(int y) {
+			this.y = y;
+		}
+		
+		// methods for changing position
+		public void addX(int x) {
+			this.x += x;
+		}
+		public void addY(int y) {
+			this.y += y;
+		}
+		
+		// methods for getting position
+		public int getX() {
+			return this.x;
+		}
+		public int getY() {
+			return this.y;
+		}
+		
+		// methods for getting height/width
+		public int getHeight() {
+			return height;
+		}
+		public int getWidth() {
+			return width;
+		}
+		
+		public void showHitBoxes(Graphics g) {
+			g.drawRect(getX(), getY(), getWidth(), getHeight());
+		}
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);

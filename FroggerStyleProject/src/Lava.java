@@ -107,6 +107,10 @@ public class Lava{
 		public int getWidth() {
 			return width;
 		}
+		public void showHitBoxes(Graphics g) {
+			g.drawRect(getX(), getY(), getWidth(), getHeight());
+		}
+		
 
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen

@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -109,6 +110,25 @@ public class Duck{
 		public int getWidth() {
 			return width;
 		}
+		
+		public void showHitBoxes(Graphics g) {
+			g.setColor(Color.red);
+			g.drawRect(getX(), getY(), getWidth(), getHeight());
+		}
+		// mehthods for setting vx/vy
+		public void setVx(int vx) {
+			this.vx = vx; 
+		}
+		public void setVy(int vy) {
+			this.vy = vy;
+		}
+		// methods for getting vx/vy
+		public int getVx() {
+			return vx;
+		}
+		public int getVy() {
+			return vy;
+		}
 	
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
@@ -116,6 +136,9 @@ public class Duck{
 		
 		x+=vx;
 		y+=vy;	
+		
+		g.setColor(Color.red);
+		g.drawRect(x, y, width, height);
 		
 		// if the object leaves the right side, wrap it around the other side for 
 		// infinite scroll	

@@ -77,36 +77,40 @@ public class Flamingo{
 	}
 	
 	// methods for setting position
-		public void setX(int x) {
-			this.x = x;
-		}
-		public void setY(int y) {
-			this.y = y;
-		}
-		
-		// methods for changing position
-		public void addX(int x) {
-			this.x += x;
-		}
-		public void addY(int y) {
-			this.y += y;
-		}
-		
-		// methods for getting position
-		public int getX() {
-			return this.x;
-		}
-		public int getY() {
-			return this.y;
-		}
-		
-		// methods for getting height/width
-		public int getHeight() {
-			return height;
-		}
-		public int getWidth() {
-			return width;
-		}
+			public void setX(int x) {
+				this.x = x;
+			}
+			public void setY(int y) {
+				this.y = y;
+			}
+			
+			// methods for changing position
+			public void addX(int x) {
+				this.x += x;
+			}
+			public void addY(int y) {
+				this.y += y;
+			}
+			
+			// methods for getting position
+			public int getX() {
+				return this.x;
+			}
+			public int getY() {
+				return this.y;
+			}
+			
+			// methods for getting height/width
+			public int getHeight() {
+				return height;
+			}
+			public int getWidth() {
+				return width;
+			}
+			
+			public void showHitBoxes(Graphics g) {
+				g.drawRect(getX(), getY(), getWidth(), getHeight());
+			}
 
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen

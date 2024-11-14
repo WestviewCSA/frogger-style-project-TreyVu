@@ -35,7 +35,7 @@ public class Slime2{
 		x = Frame.width/2 - width*2;	
 		y = Frame.height - height*2;
 		
-		vx = 3;
+		vx = 1;
 		vy = 0;
 		
 		tx = AffineTransform.getTranslateInstance(0, 0);
@@ -93,6 +93,9 @@ public class Slime2{
 			x = 0;
 		}
 		
+		g.setColor(Color.red);
+		g.drawRect(x, y, width, height);
+		
 		init(x,y);
 		
 		g2.drawImage(forward, tx,  null);
@@ -103,6 +106,58 @@ public class Slime2{
 		}
 
 	}
+	// methods for setting position
+	public void setX(int x) {
+		this.x = x;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	// methods for changing position
+	public void addX(int x) {
+		this.x += x;
+	}
+	public void addY(int y) {
+		this.y += y;
+	}
+	
+	// methods for getting position
+	public int getX() {
+		return this.x;
+	}
+	public int getY() {
+		return this.y;
+	}
+	
+	// methods for getting height/width
+	public int getHeight() {
+		return height;
+	}
+	public int getWidth() {
+		return width;
+	}
+	// mehthods for setting vx/vy
+	public void setVx(int vx) {
+		this.vx = vx; 
+	}
+	public void setVy(int vy) {
+		this.vy = vy;
+	}
+	// methods for getting vx/vy
+	public int getVx() {
+		return vx;
+	}
+	public int getVy() {
+		return vy;
+	}
+	
+	public void showHitBoxes(Graphics g) {
+		g.setColor(Color.red);
+		g.drawRect(getX(), getY(), getWidth(), getHeight());
+	}
+		
+	
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);

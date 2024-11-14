@@ -90,6 +90,22 @@ public class Monkey{
 		return width;
 	}
 	
+	// mehthods for setting vx/vy
+	public void setVx(int vx) {
+		this.vx = vx; 
+	}
+	public void setVy(int vy) {
+		this.vy = vy;
+	}
+	// methods for getting vx/vy
+	public int getVx() {
+		return vx;
+	}
+	public int getVy() {
+		return vy;
+	}
+	
+	
 	public boolean checkX() {
 		boolean result = true;
 		if ((getX()-15)% space != 0) {
@@ -107,6 +123,11 @@ public class Monkey{
 				setX(space*a+15);
 			}
         }
+	}
+	public void reset() {
+		setX(space*4+15);
+		setY(space*8+15);
+		System.out.println("RESET");
 	}
 	
 	// movement helper method
@@ -166,6 +187,7 @@ public class Monkey{
 		
 		g.setColor(Color.red);
 		g.drawRect(x, y, width, height);
+		//g.drawRect(x, y-space*3, width, space*3);
 
 		int space = Frame.width/10; 
 		if (x > Frame.width) { 
@@ -174,6 +196,10 @@ public class Monkey{
 			x = space*9 +15;
 		}
 		
+	}
+	public void showHitBoxes(Graphics g) {
+		g.setColor(Color.red);
+		g.drawRect(getX(), getY(), getWidth(), getHeight());
 	}
 	
 	private void init(double a, double b) {

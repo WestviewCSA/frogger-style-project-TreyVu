@@ -70,10 +70,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		// lines
 		int space = Frame.width/10;
-		for (int i = space; i < Frame.width; i += space) {
-			g.drawLine(0, i, Frame.width, i); // horizontal
-			g.drawLine(i, 0, i, Frame.height); // horizontal
-		}
+		
 		for (Lava obj : lavaRow1) {
 			obj.paint(g);
 		}
@@ -101,11 +98,22 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 		// paint the objects that you have
 		// for each object in the array
+		int duckMin = 3, duckMax = 5;
+		int direction = (int) Math.random()*(1-0)+0;
+		if (direction == 1) {
+			direction = 1;
+		} else {
+			direction = -1;
+		}
+		int duckSpeed = (int) Math.random()*(duckMax-duckMin)+duckMin;
+		
 		for (Duck obj : duckRow1) { // for every Duck object in row1 array
  			obj.paint(g);
+ 			//obj.setVx(duckSpeed * direction);
 		}
 		for (Duck obj : duckRow2) { // for every Duck object in row1 array
  			obj.paint(g);
+ 			//obj.setVx(duckSpeed * direction);
 		}
 		for (Slime1 obj : slimeRow1) {
 			obj.paint(g);
@@ -125,6 +133,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		monkey.paint(g);
 		
 		// collision detection for each duck object in rrow1
+		
+		boolean isMounted = false;
 		for(Duck obj : duckRow1) {
 			// for every object, invoke the collided method
 			if (obj.collided(monkey)) {
@@ -132,14 +142,16 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				monkey.setX(obj.getX());
 				monkey.setY(obj.getY());
 				System.out.println("Mount Duck");
-			}
+				isMounted = true;
+			} 
 		}
 		for(Duck obj : duckRow2) {
 			if (obj.collided(monkey)) {
 				monkey.setX(obj.getX());
 				monkey.setY(obj.getY());
 				System.out.println("Mount Duck");
-			}
+				isMounted = true;
+			} 
 		}
 		for(River obj : riverRow1) {
 			// for every object, invoke the collided method
@@ -181,8 +193,36 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				monkey.setY(obj.getY());
 			}
 		}
+		g.setColor(Color.blue);
+		for (int i = space; i < Frame.width; i += space) {
+			g.drawLine(0, i, Frame.width, i); // horizontal
+			g.drawLine(i, 0, i, Frame.height); // horizontal
+		}
 	}
-
+//	public void slimeBoxes() {
+//		for (Slime1 obj : slimeRow1) {
+//			obj.showHitBoxes(getGraphics());
+//		}
+//		for (Slime2 obj : slimeRow2) {
+//			obj.showHitBoxes(getGraphics());
+//		}
+//		for (Slime1 obj : slimeRow3) {
+//			obj.showHitBoxes(getGraphics());
+//		}
+//	}
+//	public void monkeyBox() {
+//		monkey.showHitBoxes(getGraphics());
+//	}
+//	public void duckBoxes() {
+//		for (Duck obj : duckRow1) {
+//			obj.showHitBoxes(getGraphics());
+//		}
+//		for (Duck obj : duckRow2) {
+//			obj.showHitBoxes(getGraphics());
+//		}
+//	}
+	
+	
 	
 	public static void main(String[] arg) {
 		Frame f = new Frame();
@@ -265,7 +305,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	
 	
-	@Override
+	
+	@Override 
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		

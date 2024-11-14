@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -26,8 +27,8 @@ public class Grass{
 		forward 	= getImage("/imgs/"+"bg-grass1.jpg"); //load the image for Tree
 
 		//alter these
-		width = (int) (100*scaleFactor);		// for the hit box
-		height = (int) (100*scaleFactor);		// for the hit box
+		width = 100;		// for the hit box
+		height = 80;		// for the hit box
 		
 		// top-left location of your image
 		x = Frame.width/2 - width*2;	
@@ -85,7 +86,10 @@ public class Grass{
 		public int getWidth() {
 			return width;
 		}
-
+		
+		public void showHitBoxes(Graphics g) {
+			g.drawRect(getX(), getY(), getWidth(), getHeight());
+		}
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
@@ -97,6 +101,8 @@ public class Grass{
 		
 		g2.drawImage(forward, tx,  null);
 		
+		g.setColor(Color.red);
+		g.drawRect(x, y, width, height);
 
 	}
 	

@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -27,8 +28,8 @@ public class Wood{
 		forward 	= getImage("/imgs/"+"bg-wood1.png"); //load the image for Tree
 
 		//alter these
-		width = (int) (100*scaleFactor);		// for the hit box
-		height = (int) (100*scaleFactor);		// for the hit box
+		width = 100;		// for the hit box
+		height = 80;		// for the hit box
 		
 		// top-left location of your image
 		x = Frame.width/2 - width*2;	
@@ -118,8 +119,11 @@ public class Wood{
 		init(x,y);
 		
 		g2.drawImage(forward, tx,  null);
-		
-
+		g.setColor(Color.red);
+		//g.drawRect(x, y, width, height);
+	}
+	public void showHitBoxes(Graphics g) {
+		g.drawRect(getX(), getY(), getWidth(), getHeight());
 	}
 	
 	private void init(double a, double b) {
