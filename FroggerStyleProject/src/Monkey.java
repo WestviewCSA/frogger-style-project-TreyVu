@@ -124,10 +124,40 @@ public class Monkey{
 			}
         }
 	}
+	int deathCount = 0;
+	public int getDeaths() {
+		return deathCount;
+	}
+	
+	int winCount = 0;
+	public int getWins() {
+		return winCount;
+	}
+	public void addWin() {
+		winCount++;
+	}
+	
+	public String getWinRate() {
+		double winRate = (double) (getWins())/(getWins()+getDeaths());
+		if (getDeaths() == 0) {
+			winRate = 0.0000;
+		}
+		winRate *= 100;
+		String str = "" + winRate;		
+		return "" + str.substring(0, 3) + "%";
+	}
+	
+	
 	public void reset() {
-		setX(space*4+15);
-		setY(space*8+15);
+		int finalX = space*4+15;
+		int finalY = space*8+15;
+		int t = 1; // time of travel
+		
+		setX((int) finalX);
+		setY((int) finalY);
+
 		System.out.println("RESET");
+		deathCount++;
 	}
 	
 	// movement helper method
@@ -174,7 +204,7 @@ public class Monkey{
 	
 	
 	
-	public void paint(Graphics g) {
+	public void paint(Graphics g) { 
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		
@@ -194,6 +224,10 @@ public class Monkey{
 			x = 15;
 		} else if (x < 0) {
 			x = space*9 +15;
+		}
+		if (y < 0) {
+			reset();
+			addWin();
 		}
 		
 	}

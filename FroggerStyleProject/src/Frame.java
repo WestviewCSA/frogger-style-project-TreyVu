@@ -99,21 +99,17 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		// paint the objects that you have
 		// for each object in the array
 		int duckMin = 3, duckMax = 5;
-		int direction = (int) Math.random()*(1-0)+0;
-		if (direction == 1) {
-			direction = 1;
-		} else {
-			direction = -1;
-		}
-		int duckSpeed = (int) Math.random()*(duckMax-duckMin)+duckMin;
+		int duckSpeed1 = (int) Math.random()*(duckMax-duckMin)+duckMin;
+		int duckSpeed2 = (int) Math.random()*(duckMax-duckMin)+duckMin;
+
 		
 		for (Duck obj : duckRow1) { // for every Duck object in row1 array
  			obj.paint(g);
- 			//obj.setVx(duckSpeed * direction);
+ 			obj.setVx(duckSpeed1);
 		}
 		for (Duck obj : duckRow2) { // for every Duck object in row1 array
  			obj.paint(g);
- 			//obj.setVx(duckSpeed * direction);
+ 			obj.setVx(duckSpeed2);
 		}
 		for (Slime1 obj : slimeRow1) {
 			obj.paint(g);
@@ -138,7 +134,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		for(Duck obj : duckRow1) {
 			// for every object, invoke the collided method
 			if (obj.collided(monkey)) {
-				//System.out.println("OUCH");
 				monkey.setX(obj.getX());
 				monkey.setY(obj.getY());
 				System.out.println("Mount Duck");
@@ -155,33 +150,33 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		for(River obj : riverRow1) {
 			// for every object, invoke the collided method
-			if (obj.collided(monkey)) {
+			if (obj.collided(monkey) && isMounted == false) {
+				monkey.reset();
 				System.out.println("wet");
 			}
 		}
 		for(River obj : riverRow2) {
 			// for every object, invoke the collided method
-			if (obj.collided(monkey)) {
+			if (obj.collided(monkey) && isMounted == false) {
+				monkey.reset();
 				System.out.println("wet2");
 			}
 		}
 		
 		for(Slime1 obj : slimeRow1) {
 			if (obj.collided(monkey)) {
-				monkey.setX(space*5);
-				monkey.setY(space*8);
+				monkey.reset();
+				//deathCount++;
 			}
 		}
 		for(Slime2 obj : slimeRow2) {
 			if (obj.collided(monkey)) {
-				monkey.setX(space*5);
-				monkey.setY(space*8);
+				monkey.reset();
 			}
 		}
 		for(Slime1 obj : slimeRow3) {
 			if (obj.collided(monkey)) {
-				monkey.setX(space*5);
-				monkey.setY(space*8);
+				monkey.reset();
 			}
 		}
 		
@@ -196,8 +191,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		g.setColor(Color.blue);
 		for (int i = space; i < Frame.width; i += space) {
 			g.drawLine(0, i, Frame.width, i); // horizontal
-			g.drawLine(i, 0, i, Frame.height); // horizontal
+			g.drawLine(i, 0, i, Frame.height); // vertical
 		}
+		
+		g.setColor(Color.white);
+		g.drawString("Deaths: " + monkey.getDeaths(), 15, space*9+35);
+		g.drawString("Wins: " + monkey.getWins(), 15, space*9+15);
+		g.drawString("Win Rate: " + monkey.getWinRate(), space*8+15, space*9+35);
 	}
 //	public void slimeBoxes() {
 //		for (Slime1 obj : slimeRow1) {
@@ -365,21 +365,21 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	       // release the up, down, left right, set the dx  to 0. Link will stop moving.
 	        if (key == KeyEvent.VK_LEFT) {
 	            monkey.addX(-space);
-	            System.out.println("x: " + monkey.getX());
+	            System.out.println("x: " + monkey.getX() + " = space*" + (monkey.getX()/space) + "+" + (monkey.getX()%space));
 	            monkey.fixX();
 	        } if (key == KeyEvent.VK_RIGHT) {
 	        	monkey.addX(space);	     
-	        	System.out.println("x: " + monkey.getX());
+	            System.out.println("x: " + monkey.getX() + " = space*" + (monkey.getX()/space) + "+" + (monkey.getX()%space));
 	        	monkey.fixX();
 	        } if (key == KeyEvent.VK_UP) {
 	            monkey.addY(-space);
-	            System.out.println("y: " + monkey.getY());
+	            System.out.println("y: " + monkey.getY() + " = space*" + (monkey.getY()/space) + "+" + (monkey.getY()%space));
 	            monkey.fixX();
 	        } if (key == KeyEvent.VK_DOWN) {
 	        	if (monkey.getY() != space*9+15) {
 	        		monkey.addY(space);
 	        	}
-	        	System.out.println("y: " + monkey.getY());
+	            System.out.println("y: " + monkey.getY() + " = space*" + (monkey.getY()/space) + "+" + (monkey.getY()%space));
 	        	monkey.fixX();
 	        }
 		

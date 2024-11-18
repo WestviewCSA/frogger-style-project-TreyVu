@@ -143,7 +143,9 @@ public class Duck{
 		// if the object leaves the right side, wrap it around the other side for 
 		// infinite scroll	
 		if (x > Frame.width) { 
-			x = -width;
+			x = 0;
+		} else if (x < 0) {
+			x = width;
 		}
 		
 		init(x,y);
