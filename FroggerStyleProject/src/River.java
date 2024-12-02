@@ -124,8 +124,8 @@ public class River{
 		
 		g2.drawImage(forward, tx,  null);
 		
-		g.setColor(Color.red);
-		g.drawRect(x, y, width, height);
+//		g.setColor(Color.red);
+//		g.drawRect(x, y, width, height);
 	}
 	
 	private void init(double a, double b) {

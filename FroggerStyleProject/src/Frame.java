@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -13,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,6 +47,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	// a row of MonkeyScrolling objects
 	Duck[] duckRow1 = new Duck[10]; // only creates bookshelf, not books
 	Duck[] duckRow2 = new Duck[10];
+	//arraylist version of duckRow1
+	ArrayList<Duck> row1 = new ArrayList <Duck>;
+	
 	
 	Slime1[] slimeRow1 = new Slime1[6];
 	Slime2[] slimeRow2 = new Slime2[6];
@@ -107,6 +112,17 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
  			obj.paint(g);
  			obj.setVx(duckSpeed1);
 		}
+		
+		for (int i = 0; i < 10; i++) {
+			// add the object to the list
+			row1.add(new Duck(i*180, 100)); 
+		}
+		//traverse the list
+		for (Duck obj : row1) {
+			obj.paint(g);
+		}
+		
+		
 		for (Duck obj : duckRow2) { // for every Duck object in row1 array
  			obj.paint(g);
  			obj.setVx(duckSpeed2);
@@ -188,11 +204,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				monkey.setY(obj.getY());
 			}
 		}
-		g.setColor(Color.blue);
-		for (int i = space; i < Frame.width; i += space) {
-			g.drawLine(0, i, Frame.width, i); // horizontal
-			g.drawLine(i, 0, i, Frame.height); // vertical
-		}
+//		g.setColor(Color.blue);
+//		for (int i = space; i < Frame.width; i += space) {
+//			g.drawLine(0, i, Frame.width, i); // horizontal
+//			g.drawLine(i, 0, i, Frame.height); // vertical
+//		}
 		
 		g.setColor(Color.white);
 		g.drawString("Deaths: " + monkey.getDeaths(), 15, space*9+35);

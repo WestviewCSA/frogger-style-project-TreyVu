@@ -140,8 +140,8 @@ public class Slime1{
 			x = -width;
 		}
 		
-		g.setColor(Color.red);
-		g.drawRect(x, y, width, height);
+//		g.setColor(Color.red);
+//		g.drawRect(x, y, width, height);
 		
 		init(x,y);
 		

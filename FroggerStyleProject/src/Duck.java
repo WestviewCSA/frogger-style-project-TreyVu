@@ -137,8 +137,8 @@ public class Duck{
 		x+=vx;
 		y+=vy;	
 		
-		g.setColor(Color.red);
-		g.drawRect(x, y, width, height);
+//		g.setColor(Color.red);
+//		g.drawRect(x, y, width, height);
 		
 		// if the object leaves the right side, wrap it around the other side for 
 		// infinite scroll	

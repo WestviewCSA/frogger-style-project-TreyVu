@@ -2,11 +2,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class Grass{
+public class Hearts{
 	private Image forward; 	
 	
 	private AffineTransform tx;
@@ -22,13 +23,13 @@ public class Grass{
 	double scaleHeight = scaleFactor; 		//change to scale image
 
 	// default constructor
-	public Grass() {
+	public Hearts() {
 		
-		forward 	= getImage("/imgs/"+"bg-grass1.jpg"); //load the image for Tree
+		forward 	= getImage("/imgs/"+"_______"); //load the image for Tree
 
 		//alter these
-		width = 100;		// for the hit box
-		height = 80;		// for the hit box
+		width = (int) (100*scaleFactor);		// for the hit box
+		height = (int) (100*scaleFactor);		// for the hit box
 		
 		// top-left location of your image
 		x = Frame.width/2 - width*2;	
@@ -44,7 +45,7 @@ public class Grass{
 		
 	}
 	
-	public Grass(int x, int y) {
+	public Hearts(int x, int y) {
 		// sometimes you still need the work done by another constructor, you can call it
 		this(); // invoke the default constructor
 		
@@ -53,6 +54,27 @@ public class Grass{
 		this.x = x;
 		this.y = y;
 		
+	}
+	
+	public boolean collided(Monkey mainChar) {
+		// represent each object as a rectangle
+		Rectangle rectMain = new Rectangle(
+			mainChar.getX(),
+			mainChar.getY(),
+			mainChar.getWidth(),
+			mainChar.getHeight()
+		);
+		
+		// represent the obj we're querying for info as a rectangle
+		Rectangle rectObj = new Rectangle (
+				this.x,
+				this.y,
+				this.width,
+				this.height
+		);
+		
+		return rectMain.intersects(rectObj);
+	
 	}
 	
 	// methods for setting position
@@ -101,10 +123,12 @@ public class Grass{
 		
 		g2.drawImage(forward, tx,  null);
 		
-//		g.setColor(Color.red);
-//		g.drawRect(x, y, width, height);
+		g.setColor(Color.red);
+		g.drawRect(x, y, width, height);
 
 	}
+	
+	
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
@@ -114,7 +138,7 @@ public class Grass{
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			URL imageURL = Grass.class.getResource(path);
+			URL imageURL = Hearts.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();

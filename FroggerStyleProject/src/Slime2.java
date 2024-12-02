@@ -93,9 +93,9 @@ public class Slime2{
 			x = 0;
 		}
 		
-		g.setColor(Color.red);
-		g.drawRect(x, y, width, height);
-		
+//		g.setColor(Color.red);
+//		g.drawRect(x, y, width, height);
+//		
 		init(x,y);
 		
 		g2.drawImage(forward, tx,  null);

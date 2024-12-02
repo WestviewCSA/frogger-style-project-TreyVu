@@ -71,8 +71,8 @@ public class Stone{
 		
 		g2.drawImage(forward, tx,  null);
 		
-		g.setColor(Color.red);
-		g.drawRect(x, y, width, height);
+//		g.setColor(Color.red);
+//		g.drawRect(x, y, width, height);
 	}
 	
 	// methods for setting position

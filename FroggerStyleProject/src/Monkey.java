@@ -215,8 +215,8 @@ public class Monkey{
 		
 		g2.drawImage(forward, tx,  null);
 		
-		g.setColor(Color.red);
-		g.drawRect(x, y, width, height);
+//		g.setColor(Color.red);
+//		g.drawRect(x, y, width, height);
 		//g.drawRect(x, y-space*3, width, space*3);
 
 		int space = Frame.width/10; 
