@@ -152,6 +152,7 @@ public class Monkey{
 		int finalX = space*4+15;
 		int finalY = space*8+15;
 		int t = 1; // time of travel
+		StdAudio.playInBackground("fail-234710.wav");
 		
 		setX((int) finalX);
 		setY((int) finalY);
