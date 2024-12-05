@@ -48,7 +48,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Duck[] duckRow1 = new Duck[10]; // only creates bookshelf, not books
 	Duck[] duckRow2 = new Duck[10];
 	//arraylist version of duckRow1
-	ArrayList<Duck> row1 = new ArrayList <Duck>;
+//	ArrayList<Duck> row1 = new ArrayList <Duck();
 	
 	
 	Slime1[] slimeRow1 = new Slime1[6];
@@ -113,14 +113,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
  			obj.setVx(duckSpeed1);
 		}
 		
-		for (int i = 0; i < 10; i++) {
-			// add the object to the list
-			row1.add(new Duck(i*180, 100)); 
-		}
+//		for (int i = 0; i < 10; i++) {
+//			// add the object to the list
+//			row1.add(new Duck(i*180, 100)); 
+//		}
 		//traverse the list
-		for (Duck obj : row1) {
-			obj.paint(g);
-		}
+//		for (Duck obj : row1) {
+//			obj.paint(g);
+//		}
 		
 		
 		for (Duck obj : duckRow2) { // for every Duck object in row1 array
