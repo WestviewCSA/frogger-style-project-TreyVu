@@ -112,17 +112,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
  			obj.paint(g);
  			obj.setVx(duckSpeed1);
 		}
-		
-//		for (int i = 0; i < 10; i++) {
-//			// add the object to the list
-//			row1.add(new Duck(i*180, 100)); 
-//		}
-		//traverse the list
-//		for (Duck obj : row1) {
-//			obj.paint(g);
-//		}
-		
-		
+
 		for (Duck obj : duckRow2) { // for every Duck object in row1 array
  			obj.paint(g);
  			obj.setVx(duckSpeed2);
@@ -379,19 +369,19 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 		int key = arg0.getKeyCode();
 	       // release the up, down, left right, set the dx  to 0. Link will stop moving.
-	        if (key == KeyEvent.VK_LEFT) {
+	        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
 	            monkey.addX(-space);
 	            System.out.println("x: " + monkey.getX() + " = space*" + (monkey.getX()/space) + "+" + (monkey.getX()%space));
 	            monkey.fixX();
-	        } if (key == KeyEvent.VK_RIGHT) {
+	        } if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
 	        	monkey.addX(space);	     
 	            System.out.println("x: " + monkey.getX() + " = space*" + (monkey.getX()/space) + "+" + (monkey.getX()%space));
 	        	monkey.fixX();
-	        } if (key == KeyEvent.VK_UP) {
+	        } if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
 	            monkey.addY(-space);
 	            System.out.println("y: " + monkey.getY() + " = space*" + (monkey.getY()/space) + "+" + (monkey.getY()%space));
 	            monkey.fixX();
-	        } if (key == KeyEvent.VK_DOWN) {
+	        } if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
 	        	if (monkey.getY() != space*9+15) {
 	        		monkey.addY(space);
 	        	}
